@@ -26,15 +26,15 @@ namespace BillingUICore.Server.Controllers
             _logger = logger;
             _configuration = configuration;
         }
-
-        [HttpGet("getUser")]        
+        [HttpGet("getUser")]
         public async Task<IActionResult> GetUser()
         {
+            string testUser = _configuration.GetValue<string>("AUTH-USER:TestUser");
+
             if (HttpContext?.User?.Identity?.IsAuthenticated == true)
             {
-                string appName = _configuration.GetSection("AppSettings")["TestUser"];
+                var userName = string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name) ? testUser : HttpContext.User.Identity.Name;
 
-                var userName = HttpContext.User.Identity.Name;                
                 var userExists = await _userService.GetUser(userName);
                 return userExists.HasError ? BadRequest(userExists.Data) : Ok(userExists.Data);
             }
@@ -44,16 +44,6 @@ namespace BillingUICore.Server.Controllers
             }
         }
 
-        //[HttpGet("Settings")]
-        //public async Task<IActionResult> GetModule()
-        //{
-        //    var user = HttpContext?.User?.Identity?.Name;
-        //    var result = await Implementation.GetModules();
-        //    return null;
-        //}
-
-
-
-
+              
     }
 }
