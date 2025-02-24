@@ -1,0 +1,214 @@
+<div class="my-4 user-manage-sec">
+  <div class="container">
+    <div class="custom-tab my-4">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTab === 'user'" (click)="onTabChange('user')">Users</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTab === 'role'" (click)="onTabChange('role')">Role</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div *ngIf="activeTab === 'user'" class="tab-pane fade show active" id="user" role="tabpanel">
+          <div class="d-flex justify-content-between align-items-center my-3">
+            <form class="row gy-2 gx-3 align-items-center" (ngSubmit)="onSearch()" [formGroup]="SearchUserForm">
+              <div class="col-auto">
+                <label class="visually-hidden" for="autoSizingInput">Name</label>
+                <input type="text" class="form-control" formControlName="searchQuery" id="autoSizingInput" placeholder="Search user">
+              </div>
+            </form>
+            <div class="text-end mb-3">
+              <!--<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#usermodal">Add User</button>-->
+              <button class="btn theme-btn btn-sm" (click)="openAddUserModal()">Add User</button>
+            </div>
+          </div>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of paginatedUsersList">
+                <td>{{ user.userName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roleName }}</td>
+                <td>
+                  <button class="btn theme-btn btn-sm me-2" (click)="openEditUserModal(user)">Edit</button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteUser(user.userId)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="noDataMessage" class="alert alert-warning text-center">
+            {{ noDataMessage }}
+          </div>
+          <!--Pagination-->
+          <div *ngIf="activeTab === 'user' && paginatedUsersList.length > 0">
+            <div class="pagination d-flex justify-content-between align-items-center gap-2">
+              <!--Records per page dropdown-->
+              <div class="page-count">
+                <label for="recordsPerPage">Records per page:</label>
+                <select id="recordsPerPage" class="form-select" (change)="changeRecordsPerPage($event)">
+                  <option *ngFor="let option of [5, 10, 15, 25]" [value]="option" [selected]="option === recordsPerPage">{{ option }}</option>
+                </select>
+              </div>
+              <!--Pagination Navigation-->
+              <div class="page-nav pagination">
+                <!--Previous Button-->
+                <div class="page-item">
+                  <button class="page-link" (click)="updatePaginatedList(currentPage - 1)"
+                          [disabled]="currentPage === 1">
+                    &lt;
+                  </button>
+                </div>
+
+                <!--Page Numbers-->
+                <ng-container *ngFor="let page of getPageNumbers(); let i = index">
+                  <div class="page-item" *ngIf="page !== null">
+                    <button class="page-link" (click)="updatePaginatedList(page)"
+                            [class.active]="currentPage === page">
+                      {{ page }}
+                    </button>
+                  </div>
+                  <div class="page-item disabled" *ngIf="page === null">
+                    <span class="page-link">...</span>
+                  </div>
+                </ng-container>
+
+                <!--Next Button-->
+                <div class="page-item">
+                  <button class="page-link" (click)="updatePaginatedList(currentPage + 1)"
+                          [disabled]="(currentPage * recordsPerPage) >= totalRecords">
+                    &gt;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Role Tab-->
+        <div *ngIf="activeTab === 'role'" class="tab-pane fade show active" id="role" role="tabpanel">
+          <div class="text-end mb-3">
+            <!--<button class="btn btn-primary btn-sm" (click)="openAddRoleModal()">Add Role</button>-->
+          </div>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Role Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let role of paginatedRoleList">
+                <td>{{ role.roleName }}</td>
+                <td>
+                  <button class="btn theme-btn btn-sm me-2" (click)="openEditRoleModal(role.roleId)">Edit</button>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="noDataMessage" class="alert alert-warning text-center">
+            {{ noDataMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Role Modal -->
+<div class="modal fade" id="rolemodal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true" #addRoleModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="roleModalLabel">{{ modalTitle }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeRoleModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="roleName" class="form-label">Role Name</label>
+          <input type="text" id="roleName" class="form-control"  [(ngModel)]="roleName" placeholder="Enter Role Name">
+        </div>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Read</th>
+              <th>Write</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let module of modules">
+              <td>{{ module.name }}</td>
+              <td>
+                <input type="checkbox" [(ngModel)]="module.read" class="form-check-input"/>
+              </td>
+              <td>
+                <input type="checkbox" [(ngModel)]="module.write" class="form-check-input" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- user-add-Modal -->
+<div class="modal fade" id="usermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #addUserModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ modalTitle }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeUserModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addUserForm" (ngSubmit)="saveUser()">
+          <div class="mb-2">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" formControlName="username">
+            <small class="text-danger" *ngIf="addUserForm.get('username')?.invalid && addUserForm.get('username')?.touched">
+              Username is required (min 3 characters)
+            </small>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">User email</label>
+            <input type="email" class="form-control" formControlName="email">
+            <small class="text-danger" *ngIf="addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched">
+              Valid email is required
+            </small>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Select role</label>
+            <select class="form-control" formControlName="role">
+              <option value="">Select Role</option>
+              <option *ngFor="let role of paginatedRoleList" [value]="role.roleId">
+                {{ role.roleName }}
+              </option>
+            </select>
+            <small class="text-danger" *ngIf="addUserForm.get('role')?.invalid && addUserForm.get('role')?.touched">
+              Role selection is required
+            </small>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn theme-btn btn-sm">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

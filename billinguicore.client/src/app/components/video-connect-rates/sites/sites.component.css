@@ -1,0 +1,129 @@
+.main-comp {
+  background: #eeeeee;
+  padding: 10px;
+}
+
+  .main-comp .all-lists ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+
+    .main-comp .all-lists ul li {
+      list-style-type: none;
+    }
+
+      .main-comp .all-lists ul li a {
+        padding: 10px 15px;
+        display: block;
+        text-decoration: none;
+        color: #000;
+        font-size: 14px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        margin: 0 8px 0 0;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .main-comp .all-lists ul li.active a {
+        background-color: #198754;
+        border-color: #198754;
+        color: #fff;
+      }
+
+  .main-comp .bottom-block .title-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #d4d4d4;
+    padding: 10px;
+    margin: 10px -10px;
+  }
+
+@media only screen and (max-width: 767px) {
+  .main-comp .bottom-block .title-area {
+    display: block;
+  }
+}
+
+.main-comp .bottom-block .title-area h2 {
+  margin: 0px;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.main-comp .bottom-block .all-blocks {
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 664px;
+  display: grid;
+  grid-template-columns: 23% 75%;
+  grid-column-gap: 2%;
+}
+
+@media only screen and (max-width: 1240px) {
+  .main-comp .bottom-block .all-blocks {
+    grid-template-columns: 32% 65%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .main-comp .bottom-block .all-blocks {
+    display: block;
+  }
+}
+
+.main-comp .bottom-block .all-blocks .left-block {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+  .main-comp .bottom-block .all-blocks .left-block .title {
+    background: #d4d4d4;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .main-comp .bottom-block .all-blocks .left-block .single-list {
+    padding: 0px 15px;
+    display: flex;
+    margin: 7px 0;
+    align-items: center;
+  }
+
+    .main-comp .bottom-block .all-blocks .left-block .single-list span {
+      width: 100%;
+      max-width: 120px;
+      font-size: 14px;
+    }
+/*
+.main-comp .bottom-block .all-blocks table tr th {
+  font-size: 16px;
+}
+
+.main-comp .bottom-block .all-blocks table tr td {
+  font-size: 16px;
+}*/
+
+@media screen and (max-width: 1050px) {
+  .main-comp .bottom-block .all-blocks table tr th,
+  .main-comp .bottom-block .all-blocks table tr td {
+    font-size: 14px;
+  }
+}
+
+.info-type {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.table tr td, .table tr th {
+  font-size: 13px;
+}

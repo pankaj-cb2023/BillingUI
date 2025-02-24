@@ -1,0 +1,82 @@
+<div class="mb-3 right-block-inner">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Contract Id</th>
+          <th>Site Id</th>
+          <th>Site Name</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let site of plansSiteList">
+          <td>
+            <a href="javascript:void(0)"
+               (click)="handleClick('contract', site.contractNo, $event)"
+               class="no-underline">
+              {{ site.contractNo }}
+            </a>
+          </td>
+          <td>
+            <a href="javascript:void(0)"
+               (click)="handleClick('site', site.siteId, $event)"
+               class="no-underline">
+              {{ site.siteId }}
+            </a>
+          </td>
+
+          <td>{{ site.siteName }}</td>
+          <td>{{ site.state }}</td>
+        </tr>
+        <tr *ngIf="siteTotalCount===0">
+          <td colspan="3" class="alert alert-warning text-center">No data to display</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="plansSiteList.length > 0">
+    <div class="pagination d-flex justify-content-between align-items-center gap-2">
+      <!-- Records per page dropdown -->
+      <div class="page-count">
+        <label for="srecordsPerPage">Records per page:</label>
+        <select id="srecordsPerPage" class="form-select" (change)="changeRecordsPerPagesite($event)">
+          <option *ngFor="let option of [5, 10, 15, 25]" [value]="option" [selected]="option === srecordsPerPage">{{ option }}</option>
+        </select>
+      </div>
+      <!-- Pagination Navigation -->
+      <div class="page-nav pagination">
+        <!-- Previous Button -->
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedListsite(scurrentPage - 1)"
+                  [disabled]="scurrentPage === 1">
+            &lt;
+          </button>
+        </div>
+
+        <!-- Page Numbers -->
+        <ng-container *ngFor="let page of getPageNumberssite(); let i = index">
+          <div class="page-item" *ngIf="page !== null">
+            <button class="page-link" (click)="updatePaginatedListsite(page)"
+                    [class.active]="scurrentPage === page">
+              {{ page }}
+            </button>
+          </div>
+          <div class="page-item disabled" *ngIf="page === null">
+            <span class="page-link">...</span>
+          </div>
+        </ng-container>
+
+        <!-- Next Button -->
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedListsite(scurrentPage + 1)"
+                  [disabled]="(scurrentPage * srecordsPerPage) >= siteTotalCount">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

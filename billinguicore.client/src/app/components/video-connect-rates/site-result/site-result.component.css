@@ -1,0 +1,132 @@
+.right-block-inner .legends .legends-list {
+  display: flex;
+  align-items: center;
+}
+
+.right-block-inner .legends .legends-mark,
+.right-block-inner .legends .legends-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.right-block-inner .legends .inactive,
+.right-block-inner .legends .pending {
+  text-decoration: line-through;
+}
+
+.right-block-inner .legends .inactive,
+.right-block-inner .legends .pending,
+.right-block-inner .legends .historical {
+  margin-right: 10px;
+}
+
+.right-block-inner .legends .pending {
+  color: #ff2c2c;
+}
+
+.right-block-inner .legends .inactive {
+  color: #ed9c02;
+}
+
+.right-block .legends .historical {
+  color: #04a6bb;
+}
+
+.right-block-inner .legends h5 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1050px) {
+
+  table tr th,
+  table tr td {
+    font-size: 14px;
+  }
+}
+
+
+.info-type {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.table tr td,
+.table tr th {
+  font-size: 14px;
+}
+
+
+@media screen and (max-width: 1050px) {
+
+  table tr th,
+  table tr td {
+    font-size: 14px;
+  }
+}
+
+table tr .inactive,
+table tr .pending {
+  text-decoration: line-through;
+}
+
+table tr .inactive,
+table tr .pending,
+table tr .historical {
+  margin-right: 10px;
+}
+
+table tr .pending {
+  color: #ff2c2c;
+}
+
+table tr .inactive {
+  color: #ed9c02;
+}
+
+table tr .historical {
+  color: #04a6bb;
+}
+
+.info-type {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.table tr td,
+.table tr th {
+  font-size: 13px;
+}
+
+
+.orange-row {
+  background-color: orange !important;
+}
+
+.red-row {
+  background-color: red !important;
+}
+
+.future-row td {
+  color: #ED7D31 !important;
+}
+
+.past-row td {
+  color: #FF0000 !important;
+}
+
+.present-row td {
+  color: black !important;
+}
+
+.pastDateDeactive td {
+  text-decoration: line-through !important
+}
+
+.futureDateDeactive td {
+  text-decoration: line-through !important
+}
+
+.error {
+  font-weight: bold;
+}

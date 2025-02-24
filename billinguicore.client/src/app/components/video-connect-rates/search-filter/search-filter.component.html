@@ -1,0 +1,155 @@
+<form (ngSubmit)="onSearch()" [formGroup]="SearchRatePlanForm">
+  <div class="left-block sdfdsf">
+    <div class="title">Search Options</div>
+
+    <!-- SiteID Input -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>SiteID:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <input formControlName="siteId" type="text" class="form-control" (keypress)="validateNumber($event)">
+        </div>
+      </div>
+    </div>
+
+    <!-- ContractID Input -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>ContractID:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <input formControlName="contractNo" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- Site Name Input -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Site Name:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <input formControlName="siteName" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- State Input -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>State:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <input formControlName="state" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>FILTERS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call Type Dropdown -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Call Type:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <select formControlName="callTypeCd" class="form-select">
+            <option value="VDR">VDR</option>
+            <option value=""></option>
+
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Effective Date Input -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Effective Date:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <input formControlName="startDt" type="date" class="form-control">
+        </div>
+      </div>
+    </div>
+    <!-- Pending Dropdown -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Pending:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <select class="form-select" formControlName="pending">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Historical Dropdown -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Historical:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <select class="form-select" formControlName="historical">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Active Dropdown -->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <span>Active:</span>
+        </div>
+        <div class="col-5 col-md-8">
+          <select class="form-select" formControlName="active">
+            <option value=1>Yes</option>
+            <option value=0>No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <!--<div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4"></div>
+        <div class="col-5 col-md-8">
+          <div class="buttons mt-3 mb-3">
+            <button type="submit" class="btn btn-success me-2">Search</button>
+            <button type="button" class="btn btn-danger" (click)="onReset()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <div class="single-list d-block mb-3">
+      <div class="row">
+        <div class="col-5 col-md-4"></div>
+        <div class="col-5 col-md-8">
+          <div class="buttons mt-3 mb-3" *ngIf="hasReadOnlyPermission">
+            <button type="submit" class="btn btn-success me-2">Search</button>
+            <button type="button" class="btn btn-danger" (click)="onReset()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</form>

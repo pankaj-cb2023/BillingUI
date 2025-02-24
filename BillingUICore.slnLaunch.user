@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "BillingUICore.Server\\BillingUICore.Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "billinguicore.client\\billinguicore.client.esproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+C:\ME\BillingUICore\billinguicore.client\obj\Debug\billinguicore.client.esproj.CoreCompileInputs.cache

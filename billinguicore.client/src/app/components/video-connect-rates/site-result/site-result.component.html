@@ -1,0 +1,127 @@
+<div *ngIf="gridErrorMessage" class="alert alert-danger text-center error">
+  {{ gridErrorMessage }}
+</div>
+<div class="mb-3 right-block-inner" *ngIf="!gridErrorMessage">
+  <div class="header-section d-flex align-items-center">
+    <div class="col-11">
+      <div class="fw-bold fw-bold d-flex">
+        <div class="col-1">Agency :</div>
+        <div class="col">
+          <ng-container *ngIf="searchData?.isSiteClicked; else nonClickable">
+            <a href="javascript:void(0)" (click)="onContractClick($event)" style="text-decoration: underline;">
+              {{ searchData?.contractNo }}
+            </a>
+          </ng-container>
+        </div>
+        <ng-template #nonClickable>
+          <span>{{ searchData?.contractNo }}</span>
+        </ng-template>
+      </div>
+      <div *ngIf="searchData?.isSearchBySiteIdOrName" class="fw-bold d-flex">
+        <div class="col-1">Site:</div> <div class="col">{{ searchData?.siteId }} - {{ searchData?.siteName }}, {{searchData?.state}}</div>
+      </div>
+      <div class="call-type mb-4 d-flex">
+        <div class="col-1">Call Type :</div>
+        <div class="col">Remote Video Session (VDR)</div>
+      </div>
+    </div>
+    
+    <button *ngIf="hasReadOnlyPermission" class="btn btn-primary text-nowrap ms-2" style="float:right;" (click)="openAddModal()"> + Add New </button>
+
+  </div>
+
+  <h6 class="mb-3" *ngIf="siteTotalCount">Found {{ siteTotalCount }} rate plans.</h6>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th style="cursor: pointer;">
+            Site Id
+            <!--  <svg class="up-down"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                  style="width: 8px; margin: -5px 0 0 4px;"
+                  [ngClass]="sortOrder === 'asc' ? 'asc-icon' : 'desc-icon'">
+                 <path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" />
+             </svg> -->
+          </th>
+          <th>Site Name</th>
+          <th>Securus Rate</th>
+          <th>Comm Rate</th>
+          <th>Agency Rate</th>
+          <th>Include Agency In Total</th>
+          <th>Comm Type</th>
+          <th>Rounding Threshold</th>
+          <th>Audit Note</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Audit User</th>
+          <th>Audit Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plan of plansSiteList">
+          <td>{{ plan.siteId }}</td>
+          <td>{{ plan.siteName }}</td>
+          <td>{{ plan.securusRatePerMinAmt }}</td>
+          <td>{{ plan.commRatePerMinAmt }}</td>
+          <td>{{ plan.agencyRatePerMinAmt }}</td>
+          <td>{{ plan.includeAgencyRateInTotalFl }}</td>
+          <td>{{ plan.commTypeDs }}</td>
+          <td>{{ plan.roundingThresholdNr }}</td>
+          <td>{{ plan.auditNoteTxt }}</td>
+          <td>{{ plan.startDt | date : "MM/dd/yyyy"  }}</td>
+          <td>{{ plan.endDt | date : "MM/dd/yyyy"  }}</td>
+          <td>{{ plan.createdBy  }}</td>
+          <td>{{ plan.createDt | date : "MM/dd/yyyy" }}</td>
+        </tr>
+        <tr *ngIf="siteTotalCount===0">
+          <td colspan="14" class="alert alert-warning text-center">No data to display</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="plansSiteList.length > 0">
+    <div class="pagination d-flex justify-content-between align-items-center gap-2">
+      <!-- Records per page dropdown -->
+      <div class="page-count">
+        <label for="srecordsPerPage">Records per page:</label>
+        <select id="srecordsPerPage" class="form-select" (change)="changeRecordsPerPagesite($event)">
+          <option *ngFor="let option of [5, 10, 15, 25]" [value]="option" [selected]="option === srecordsPerPage">{{ option }}</option>
+        </select>
+      </div>
+      <!-- Pagination Navigation -->
+      <div class="page-nav pagination">
+        <!-- Previous Button -->
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedListsite(scurrentPage - 1)"
+                  [disabled]="scurrentPage === 1">
+            &lt;
+          </button>
+        </div>
+
+        <!-- Page Numbers -->
+        <ng-container *ngFor="let page of getPageNumberssite(); let i = index">
+          <div class="page-item" *ngIf="page !== null">
+            <button class="page-link" (click)="updatePaginatedListsite(page)"
+                    [class.active]="scurrentPage === page">
+              {{ page }}
+            </button>
+          </div>
+          <div class="page-item disabled" *ngIf="page === null">
+            <span class="page-link">...</span>
+          </div>
+        </ng-container>
+
+        <!-- Next Button -->
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedListsite(scurrentPage + 1)"
+                  [disabled]="(scurrentPage * srecordsPerPage) >= siteTotalCount">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

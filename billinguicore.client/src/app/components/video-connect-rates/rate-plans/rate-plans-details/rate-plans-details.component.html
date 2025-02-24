@@ -1,0 +1,64 @@
+<div class="main-comp">
+    <app-video-connect-tabs></app-video-connect-tabs>
+    <div class="bottom-block">
+        <div class="title-area">           
+            <h2>RATE PLAN - {{ planDetail.billingRateId }} - {{ planDetail.siteName }}</h2>
+            <div class="right-area d-flex">
+                <input type="search" class="form-control" placeholder="Search">
+                <button class="btn btn-primary text-nowrap ms-2" (click)="openModal()">+ Add</button>
+            </div>
+        </div>
+        <div class="all-lists">
+            <ul>
+                <li [class.active]="activeTab === 'summary'" (click)="setActiveTab('summary')">
+                    <a>Summary</a>
+                </li>
+                <li [class.active]="activeTab === 'sites'" (click)="setActiveTab('sites')">
+                    <a>Sites</a>
+                </li>               
+                <li [class.active]="activeTab === 'history'" (click)="setActiveTab('history')">
+                    <a>History</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Conditionally show components based on activeTab -->    
+    </div>
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal" id="exampleModal" #model>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Rate Plan </h5>
+                <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="single-list mb-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-4">
+                            <label class="form-label text-right">Description :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-7 col-lg-8">
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-list mb-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-4">
+                            <label class="form-label text-right">Subscription :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-7 col-lg-8">
+                            <input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div> -->

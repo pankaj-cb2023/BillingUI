@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:4200",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\ME\\GIt_BillingUI\\BillingUI\\BillingUICore.Server\\..\\billinguicore.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

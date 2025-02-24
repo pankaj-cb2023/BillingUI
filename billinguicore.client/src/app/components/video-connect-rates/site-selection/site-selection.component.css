@@ -1,0 +1,9 @@
+.no-underline {
+  color: black; /* Make text black */
+  text-decoration: none; /* Remove underline */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+  .no-underline:hover {
+    text-decoration: underline; /* Optional: Add underline on hover */
+  }

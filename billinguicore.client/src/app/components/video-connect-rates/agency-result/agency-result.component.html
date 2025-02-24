@@ -1,0 +1,123 @@
+<div class="mb-3 right-block-inner" *ngIf="!gridErrorMessage">
+  <h6 class="mb-3">[DEFAULT] Remote Attorney Video Session (VAR)</h6>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Site Id</th>
+          <th>Site Name</th>
+          <th>Securus Rate</th>
+          <th>Comm Rate</th>
+          <th>Agency Rate</th>
+          <th>Include Agency In Total</th>
+          <th>Comm Type</th>
+          <th>Rounding Threshold</th>
+          <th>Audit Note</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Audit User</th>
+          <th>Audit Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rate of planRateList" [ngClass]="{ 'future-row': isFutureDate(rate.startDt),'past-row': isPastDate(rate.endDt),'present-row':isPresentDate(rate.startDt),'pastDateDeactive':isPastDateDeactive(rate.endDt,rate.active),'futureDateDeactive': isFutureDateDeactive(rate.startDt,rate.active)}">
+          <td>
+            <a href="javascript:void(0)" (click)="getSiteData(rate.siteId,rate.siteName,rate.contractNo,rate.state); $event.preventDefault()">
+              {{ rate.siteId }}
+            </a>
+          </td>
+          <td>
+            <a href="javascript:void(0)" (click)="getSiteData(rate.siteId,rate.siteName,rate.contractNo,rate.state); $event.preventDefault()">
+              {{ rate.siteName }}
+            </a>
+          </td>
+          <td>{{ rate.securusRatePerMinAmt }}</td>
+          <td>{{ rate.commRatePerMinAmt }}</td>
+          <td>{{ rate.agencyRatePerMinAmt }}</td>
+          <td>{{ rate.includeAgencyRateInTotalFl }}</td>
+          <td>{{ rate.commTypeDs }}</td>
+          <td>{{ rate.roundingThresholdNr }}</td>
+          <td>{{ rate.auditNoteTxt }}</td>
+          <td>{{ rate.startDt | date: "MM/dd/yyyy" }}</td>
+          <td>{{ rate.endDt | date: "MM/dd/yyyy" }}</td>
+          <td>{{ rate.createdBy }}</td>
+          <td>{{ rate.createDt | date: "MM/dd/yyyy" }}</td>
+          <td>
+            <input type="hidden" [value]="rate.billingRateId" id="hdnBillingRatePlanId" />
+            <a *ngIf="isFutureDate(rate.startDt) || isPresentDate(rate.startDt)"
+               class="btn btn-primary btn-sm" (click)="onEditClick(rate)">
+              Edit
+            </a>
+          </td>        
+        </tr>
+        <tr *ngIf="dataTotalCount===0">
+          <td colspan="14" class="alert alert-warning text-center">No data to display</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--Pagination-->
+  <div *ngIf="planRateList.length > 0">
+    <div class="pagination d-flex justify-content-between align-items-center gap-2">
+       <!--Records per page dropdown--> 
+      <div class="page-count">
+        <label for="recordsPerPage">Records per page:</label>
+        <select id="recordsPerPage" class="form-select" (change)="changeRecordsPerPage($event)">
+          <option *ngFor="let option of [5, 10, 15, 25, 50]" [value]="option" [selected]="option === recordsPerPage">{{ option }}</option>
+        </select>
+      </div>
+       <!--Pagination Navigation--> 
+      <div class="page-nav pagination">
+         <!--Previous Button--> 
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedList(currentPage - 1)"
+                  [disabled]="currentPage === 1">
+            &lt;
+          </button>
+        </div>
+
+         <!--Page Numbers--> 
+        <ng-container *ngFor="let page of getPageNumbers(); let i = index">
+          <div class="page-item" *ngIf="page !== null">
+            <button class="page-link" (click)="updatePaginatedList(page)"
+                    [class.active]="currentPage === page">
+              {{ page }}
+            </button>
+          </div>
+          <div class="page-item disabled" *ngIf="page === null">
+            <span class="page-link">...</span>
+          </div>
+        </ng-container>
+
+         <!--Next Button--> 
+        <div class="page-item">
+          <button class="page-link" (click)="updatePaginatedList(currentPage + 1)"
+                  [disabled]="(currentPage * recordsPerPage) >= dataTotalCount">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="legends">
+    <h5>Legends</h5>
+    <div class="legends-list">
+      <a class="legends-mark pending">Pending</a>
+      <p class="legends-text">records have a future start date and are not yet active</p>
+    </div>
+    <div class="legends-list">
+      <p class="legends-mark historical">Historical</p>
+      <p class="legends-text"> records have more recent records that supercode theme</p>
+    </div>
+    <div class="legends-list">
+      <p class="legends-mark inactive">Inactive</p>
+      <p class="legends-text">Inactive records stopped the rate on that date</p>
+    </div>
+    <div class="legends-list">
+      <p class="legends-mark pending">Pending Inactive</p>
+      <p class="legends-text">Pending Inactive records stop the rate on a future date</p>
+    </div>
+  </div>
+</div>

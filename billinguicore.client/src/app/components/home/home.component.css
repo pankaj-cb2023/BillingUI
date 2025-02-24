@@ -1,0 +1,24 @@
+.home {
+  padding: 30px 20px;
+  background-color: #fff;
+  box-sizing:border-box;
+  padding:20px 0;
+  height: calc(100vh - 148px);
+}
+.card-nav{
+    background-color: #004273;
+    border: solid 1px #004273;
+    color: #fff;
+    text-align: center;
+}
+.btn-primary.btn-lg{
+    background-color: #004273;
+    border: solid 1px #004273;
+    display: block;
+    padding: 15px 10px;
+}
+.btn-primary.btn-lg:hover,
+.btn-primary.btn-lg:focus{
+    background-color: #035391;
+    border: solid 1px #035391;
+}

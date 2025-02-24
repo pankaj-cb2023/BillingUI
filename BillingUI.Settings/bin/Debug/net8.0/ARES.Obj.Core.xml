@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ARES.Obj.Core</name>
+    </assembly>
+    <members>
+        <member name="T:ARES.Obj.Core.Globals.ErrorConstants">
+            <summary>
+            Error codes
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.SUCCESS">
+            <summary>
+            Success error code: 0
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.INVALID_DATA">
+            <summary>
+            Invalid data: 40001
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.HTTPS_REQUIRED">
+            <summary>
+            HTTPS is required: 49003
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.HEARTBEAT">
+            <summary>
+            Heartbeat error code: 50000
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.EXCEPTION">
+            <summary>
+            Exception error code: 59999
+            </summary>
+        </member>
+        <member name="F:ARES.Obj.Core.Globals.ErrorConstants.SQL_EXCEPTION">
+            <summary>
+            SQL_EXCEPTION error code: 59998
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Globals.ErrorConstants.GetHttpStatus(System.Int32)">
+            <summary>
+            Returns appropriate generic http status code based on ARES error code ranges
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ListResponse`1.#ctor">
+            <summary>
+            Initializes a new instance of the ListResponse class.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ListResponse`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            Initializes a new instance of the success ListResponse class with initialized value.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ListResponse`1.#ctor(System.Int32,System.String,System.Collections.Generic.List{`0})">
+            <summary>
+            Initializes a new instance of the ListResponse class with initialized values.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ObjectResponse`1.#ctor">
+            <summary>
+            Initializes a new instance of the ObjectResponse class.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ObjectResponse`1.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the ObjectResponse class with error code and message.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ObjectResponse`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the success ObjectResponse class with initialized value.
+            </summary>
+        </member>
+        <member name="M:ARES.Obj.Core.Responses.ObjectResponse`1.#ctor(System.Int32,System.String,`0)">
+            <summary>
+            Initializes a new instance of the ObjectResponse class with initialized values.
+            </summary>
+        </member>
+    </members>
+</doc>

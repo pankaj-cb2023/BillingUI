@@ -1,0 +1,19 @@
+<header class="header-part">
+    <div class="left-header">
+        <img src="images/logo.png" />
+    </div>
+    <div class="right-header">
+        <div class="search">
+          <select [(ngModel)]="selectedOption" (change)="onOptionChange()">
+            <option value="" disabled selected>Please Select</option>
+            <option value="1">Home</option>
+            <!-- <option value="2">Payment Config</option> -->
+            <option value="Video Connect Rates">Video Connect Rates</option>
+            <!-- <option value="4">Call Subscription Rates</option> -->
+            <!-- <option value="5">Text Connect Rates</option> -->
+           <!--  <option value="6">Enrollee Pay Rates</option> -->
+          </select>
+        </div>
+        <div class="info">Dev Environment</div>
+    </div>
+</header>

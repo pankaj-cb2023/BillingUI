@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "D0++5tgIX7xwdY6O4eQR/T+y3Jj2Lsi/a6YGLJr04p0=",
+  "Source": "BillingUICore.Server",
+  "BasePath": "_content/BillingUICore.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\ME\\BillingUICore\\billinguicore.client\\billinguicore.client.esproj",
+      "Version": 2,
+      "Source": "billinguicore.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

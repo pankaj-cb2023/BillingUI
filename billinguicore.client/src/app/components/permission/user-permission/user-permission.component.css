@@ -1,0 +1,52 @@
+.user-manage-sec {
+  box-sizing: border-box;
+  padding: 20px 0;
+  width: 100%;
+  min-height: calc(100vh - 196px);
+}
+
+.custom-tab .nav-tabs {
+  border-bottom: none;
+}
+
+.custom-tab .nav-tabs li.nav-item {
+    border: #ccc solid thin;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+
+.custom-tab .nav-tabs li.nav-item > .nav-link {
+      padding: 5px 24px;
+      color: #000;
+      font-size: 14px;
+      border-radius: 8px;
+    }
+
+.custom-tab .nav-tabs li.nav-item > .nav-link.active {
+  border: #004273 solid thin;
+  color: #fff;
+  border-radius: 8px;
+  background: #004273;
+}
+
+
+.btn.theme-btn, .btn.theme-btn:hover, .btn.theme-btn:focus,
+.theme-btn, .theme-btn:hover, .theme-btn:focus {
+  background-color: #004273;
+  border: solid 1px #004273;
+  color: #fff;
+}
+
+.pagination .active > .page-link, .pagination .page-link.active {
+  z-index: 3;
+  color: #004273;
+  background-color: #004273;
+  border-color: #004273;
+}
+.pagination .page-link {
+  color: #004273;
+}
+
+.pagination .active > .page-link, .pagination .page-link.active {
+  color: #fff;
+}
